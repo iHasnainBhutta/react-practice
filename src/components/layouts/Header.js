@@ -56,8 +56,12 @@ function CollapsibleExample() {
       </Container>
 
       <Nav>
-        <Nav.Link href="#mycart">MY CART</Nav.Link>
-        <Nav.Link to="login">LOGIN</Nav.Link>
+        <Nav.Link as={Link} to="/cart">
+          MY CART
+        </Nav.Link>
+        <Nav.Link as={Link} to="/login">
+          LOGIN
+        </Nav.Link>
       </Nav>
 
       {/* </Container> */}

@@ -16,6 +16,7 @@ import Kids from "../src/pages/Kids";
 import NewArrivals from "../src/pages/NewArrivals";
 import Sale from "../src/pages/Sale";
 import Home from "./pages/Home";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/men" element={<Men />} />
         <Route path="/women" element={<Women />} />
+        <Route path="/kids" element={<Kids />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </>
   );
