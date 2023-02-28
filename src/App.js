@@ -17,6 +17,8 @@ import NewArrivals from "../src/pages/NewArrivals";
 import Sale from "../src/pages/Sale";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
+import Forget from "./pages/Forget";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/women" element={<Women />} />
         <Route path="/kids" element={<Kids />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/forget" element={<Forget />} />
+        <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
       </Routes>
     </>
   );
