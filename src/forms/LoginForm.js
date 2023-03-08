@@ -32,6 +32,7 @@ function LoginForm() {
         }
       );
       if (res.status === 200) {
+        // console.log(res.data.result.token);
         if (!res.data.result.verified) {
           setLoading(false);
           setVerified(false);
@@ -42,6 +43,13 @@ function LoginForm() {
           setVerified(true);
           setCheck(true);
           setData(res);
+          const result = await res.data.result.token;
+          localStorage.setItem("user-info", result);
+
+          setTimeout(() => {
+            window.location.href = "/ViewUsers";
+            // history.back();
+          }, 2000);
         }
         //   toast.success(res.data);
         //   toast.success(res.data, {

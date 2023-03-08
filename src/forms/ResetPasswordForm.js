@@ -31,10 +31,14 @@ function ResetForm() {
         }
       );
       if (res.status === 200) {
-        setCheck(true);
+        // setCheck(true);
         setLoading(false);
         //   toast.success(res.data);
-        setInterval(navigate("/login"), 2000);
+        setTimeout(setCheck(true), 3000);
+        setTimeout(() => {
+          window.location.href = "/login";
+          // history.back();
+        }, 4000);
       } else {
         setLoading(false);
         alert(res);

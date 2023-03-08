@@ -1,22 +1,24 @@
 import Container from "react-bootstrap/Container";
+import { propTypes } from "react-bootstrap/esm/Image";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
+import HeaderCartButton from "./HeaderCartButton";
 
-function CollapsibleExample() {
+function CollapsibleExample(props) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <div>
         <img
-          src={require("../../components/assets/wolfLogo.png")}
+          src={require("../../components/assets/shopping.png")}
           width="50"
           height="50"
           alt="logo"
         />
       </div>
-      <Navbar.Brand style={{ marginLeft: 20, fontWeight: "bold" }} href="#home">
-        eCart
+      <Navbar.Brand style={{ marginLeft: 10, fontWeight: "bold" }} href="#home">
+      Click 2 Cart
       </Navbar.Brand>
       <Container style={{ marginLeft: 20 }}>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -56,11 +58,12 @@ function CollapsibleExample() {
       </Container>
 
       <Nav>
-        <Nav.Link as={Link} to="/cart">
+        {/* <Nav.Link as={Link} to="/cart">
           MY CART
-        </Nav.Link>
+        </Nav.Link> */}
+        <HeaderCartButton />
         <Nav.Link as={Link} to="/login">
-          LOGIN
+          {props.title}
         </Nav.Link>
       </Nav>
 
