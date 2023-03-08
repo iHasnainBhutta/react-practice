@@ -47,6 +47,10 @@ function Signup() {
         //   toast.success(res.data, {
         //     position: toast.POSITION.TOP_RIGHT,
         //   });
+        setTimeout(() => {
+          window.location.href = "/login";
+          // history.back();
+        }, 2000);
         console.log(">>>>>", res.data.result.verified);
       } else {
         setLoading(false);

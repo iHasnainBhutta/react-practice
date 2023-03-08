@@ -18,7 +18,7 @@ function CollapsibleExample(props) {
         />
       </div>
       <Navbar.Brand style={{ marginLeft: 10, fontWeight: "bold" }} href="#home">
-      Click 2 Cart
+      Shopping Adventures
       </Navbar.Brand>
       <Container style={{ marginLeft: 20 }}>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
