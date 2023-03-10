@@ -45,11 +45,12 @@ function LoginForm() {
           setData(res);
           const result = await res.data.result.token;
           localStorage.setItem("user-info", result);
+          window.location.href = "/home";
 
-          setTimeout(() => {
-            window.location.href = "/ViewUsers";
-            // history.back();
-          }, 2000);
+          // setTimeout(() => {
+          //   window.location.href = "/home";
+          //   // history.back();
+          // }, 2000);
         }
         //   toast.success(res.data);
         //   toast.success(res.data, {
@@ -154,11 +155,11 @@ function LoginForm() {
         </div>
       )}
 
-      {verified && (
+      {/* {verified && (
         <div>
           <h4>Welcome back</h4>
         </div>
-      )}
+      )} */}
     </>
   );
 }

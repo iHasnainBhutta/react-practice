@@ -5,8 +5,13 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import HeaderCartButton from "./HeaderCartButton";
-
+import Dropdown from "react-bootstrap/Dropdown";
 function CollapsibleExample(props) {
+  const handleLogout = () => {
+    localStorage.removeItem("user-info");
+    window.location = "/login";
+
+  };
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <div>
@@ -17,10 +22,13 @@ function CollapsibleExample(props) {
           alt="logo"
         />
       </div>
-      <Navbar.Brand style={{ marginLeft: 10, fontWeight: "bold" }} href="#home">
-      Shopping Adventures
+      <Navbar.Brand
+        style={{ marginLeft: 10, fontWeight: "bold" }}
+        href={props.url ? "/home" : "/login"}
+      >
+        Shopping Adventures
       </Navbar.Brand>
-      <Container style={{ marginLeft: 20 }}>
+      <Container style={{ marginLeft: 20, width: "50%" }}>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -61,10 +69,36 @@ function CollapsibleExample(props) {
         {/* <Nav.Link as={Link} to="/cart">
           MY CART
         </Nav.Link> */}
+        {props.isLogin && (
+          <Nav.Link as={Link} to="/AddProduct">
+            INSERT PRODUCT
+          </Nav.Link>
+        )}
         <HeaderCartButton />
-        <Nav.Link as={Link} to="/login">
-          {props.title}
-        </Nav.Link>
+        {!props.isLogin && (
+          <Nav.Link as={Link} to="/login">
+            {props.title}
+          </Nav.Link>
+        )}
+
+        {props.isLogin && (
+          <Dropdown style={{ marginLeft: 5 }}>
+            <Dropdown.Toggle
+              style={{
+                backgroundColor: "#010e4d",
+                borderRadius: 50,
+                padding: "0.50rem 0.9rem",
+              }}
+            >
+              My Profile
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="">Edit Profile</Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        )}
       </Nav>
 
       {/* </Container> */}

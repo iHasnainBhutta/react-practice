@@ -3,10 +3,14 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import FormData from "form-data";
+import { resolveUrl } from "../api/urls";
 
 function AddProductForm() {
   const [data, setData] = useState("");
   const [productName, setProductName] = useState();
+  const [productImage, setProductImage] = useState();
+  console.log(">Image", productImage ? productImage[0] : "");
   const [productDes, setProductDes] = useState();
   const [productCategory, setProductCategory] = useState();
   const [stock, setStock] = useState();
@@ -16,11 +20,23 @@ function AddProductForm() {
   const [verified, setVerified] = useState(false);
 
   const headers = {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
+    // "Content-Type": "application/json",
   };
 
   const addProduct = async (e) => {
     e.preventDefault();
+    // console.log(">>>>>>>>>>>>>>>>>>", productImage[0]);
+    // const imageName = resolveUrl(productImage);
+    // console.log(filename);
+    const formData = new FormData();
+    formData.append("image_url", productImage[0], productImage[0].name);
+    formData.append("product_name", productName);
+    formData.append("product_description", productDes);
+    formData.append("product_category", productCategory);
+    formData.append("stock_quantity", stock);
+    formData.append("p_price", productPrice);
+    console.log(">>", formData);
     try {
       setLoading(true);
 
@@ -28,13 +44,14 @@ function AddProductForm() {
       // console.log(values);
       const res = await axios.post(
         `http://localhost:8008/user/insert-product`,
-        {
-          product_name: productName,
-          product_description: productDes,
-          product_category: productCategory,
-          stock_quantity: stock,
-          p_price: productPrice,
-        },
+        // {
+        //   product_name: productName,
+        //   product_description: productDes,
+        //   product_category: productCategory,
+        //   stock_quantity: stock,
+        //   p_price: productPrice,
+        // },
+        formData,
         { headers },
         {
           withCredentials: true,
@@ -45,7 +62,7 @@ function AddProductForm() {
         // alert("working");
         // setData(res.data.result);
         setLoading(false);
-        window.location.href = "/ViewUsers";
+        // window.location.href = "/ViewUsers";
         // console.log(">>", res.data.result);
         // console.log(res);
 
@@ -74,6 +91,16 @@ function AddProductForm() {
           placeholder="Enter Product Name"
           value={productName}
           onChange={(e) => setProductName(e.target.value)}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label>Product Image</label>
+        <input
+          type="file"
+          className="form-control"
+          placeholder="Upload Product Image Here.."
+          onChange={(e) => setProductImage(e.target.files)}
           required
         />
       </div>

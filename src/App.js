@@ -36,7 +36,11 @@ function App(props) {
 
   return (
     <>
-      <Navbar title={check ? "LOGOUT" : "LOGIN"} />
+      <Navbar
+        title={check ? "LOGOUT" : "LOGIN"}
+        isLogin={check ? true : false}
+        url={check ? true : false}
+      />
       {!check && (
         <Routes>
           <Route path="/signup" element={<Signup />} />
@@ -54,7 +58,7 @@ function App(props) {
           <Route path="/women" element={<Women />} />
           <Route path="/kids" element={<Kids />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/ViewUsers" element={<ViewUsers />} />
+          <Route path="/home" element={<ViewUsers />} />
           <Route path="/AddProduct" element={<AddProduct />} />
         </Routes>
       )}
