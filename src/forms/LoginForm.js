@@ -45,7 +45,7 @@ function LoginForm() {
           setData(res);
           const result = await res.data.result.token;
           localStorage.setItem("user-info", result);
-          window.location.href = "/home";
+          window.location.href = "/";
 
           // setTimeout(() => {
           //   window.location.href = "/home";

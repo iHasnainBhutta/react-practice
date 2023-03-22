@@ -1,8 +1,8 @@
 import React from "react";
 import LoginForm from "../forms/LoginForm";
 import { ToastContainer, toast } from "react-toastify";
-import AllUsers from "../tables/AllUsers";
-const ViewUsers = () => {
+import ProductsView from "../tables/ProductsView";
+const Products = () => {
   return (
     <div
       style={{
@@ -13,10 +13,10 @@ const ViewUsers = () => {
       }}
     >
       <div style={{ marginTop: "30px" }}>
-        <AllUsers />
+        <ProductsView />
       </div>
     </div>
   );
 };
 
-export default ViewUsers;
+export default Products;

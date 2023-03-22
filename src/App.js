@@ -20,8 +20,12 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Forget from "./pages/Forget";
 import ResetPassword from "./pages/ResetPassword";
-import ViewUsers from "./pages/ViewUsers";
+import Products from "./pages/Products";
 import AddProduct from "./pages/AddProduct";
+import Dashboard from "./pages/Dashboard";
+import DeleteProduct from "./pages/DeleteProduct";
+import ProductsList from "./pages/ProductsList";
+import SingleProductView from "./pages/SingleProductView";
 
 function App(props) {
   const [check, isCheck] = useState(false);
@@ -54,12 +58,16 @@ function App(props) {
       )}
       {check && (
         <Routes>
+          <Route path="/" element={<Dashboard />} />
           <Route path="/men" element={<Men />} />
           <Route path="/women" element={<Women />} />
           <Route path="/kids" element={<Kids />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/home" element={<ViewUsers />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/AddProduct" element={<AddProduct />} />
+          <Route path="/deleteProduct" element={<DeleteProduct />} />
+          <Route path="/ProductsList" element={<ProductsList />} />
+          <Route path="/product-view" element={<SingleProductView />} />
         </Routes>
       )}
     </>

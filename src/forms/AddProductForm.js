@@ -5,6 +5,8 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import FormData from "form-data";
 import { resolveUrl } from "../api/urls";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function AddProductForm() {
   const [data, setData] = useState("");
@@ -18,6 +20,7 @@ function AddProductForm() {
   const [check, setCheck] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [verified, setVerified] = useState(false);
+  const navigate = useNavigate();
 
   const headers = {
     "Content-Type": "multipart/form-data",
@@ -62,7 +65,23 @@ function AddProductForm() {
         // alert("working");
         // setData(res.data.result);
         setLoading(false);
-        // window.location.href = "/ViewUsers";
+        toast.success("Product Added Successfully", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+
+            setTimeout(() => {
+              navigate("/products", { replace: true });
+          // history.back();
+        }, 2000);
+
+        // window.location.href = "/home";
         // console.log(">>", res.data.result);
         // console.log(res);
 
@@ -81,6 +100,18 @@ function AddProductForm() {
 
   return (
     <form onSubmit={addProduct}>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        // draggable
+        // pauseOnHover
+        theme="light"
+      />
       <h3>Add New Product</h3>
 
       <div className="mb-3">

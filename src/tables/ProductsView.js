@@ -3,16 +3,23 @@ import React, { useState, useEffect } from "react";
 import LoginForm from "../forms/LoginForm";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import { Products } from "../components/layouts/ProductCard";
 import contents from "../content";
+import { Card, Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../features/cartSlice";
 
-const AllUsers = (props) => {
+
+const ProductsView = (props) => {
   const [data, setData] = useState([]);
   const [userData, setUserData] = useState([]);
   // const [items, setItems] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
 
+  const items = useSelector((state) => state.allCart);
+  const dispatch = useDispatch();
+  console.log(items);
   const handleOnChange = (e) => {
     const { name, checked } = e.target;
     // alert(name);
@@ -75,6 +82,8 @@ const AllUsers = (props) => {
     "Content-Type": "application/json",
   };
 
+  let img = `http://localhost:8008/`;
+
   const [rows, setRows] = useState(data);
 
   const deleteRow = async (rowId) => {
@@ -118,6 +127,7 @@ const AllUsers = (props) => {
     getData();
   }, []);
 
+  console.log(">>", data);
   //   console.log(columns[1].Header);
   // console.log(">>>>>>>>>>>>>>>>>>>>>..", data[0].verified);
   const getData = async (e) => {
@@ -151,17 +161,19 @@ const AllUsers = (props) => {
       console.error(error);
     }
   };
+  
   return (
     <div className="App">
-      {contents.map((contents) => (
+      {data.map((contents) => (
         <Products
-          key={contents.id}
-          image={contents.image}
-          name={contents.name}
-          price={contents.price}
-          totalSales={contents.totalSales}
-          timeLeft={contents.timeLeft}
-          rating={contents.rating}
+          key={contents.p_id}
+          image={img + contents.image_url}
+          name={contents.product_name}
+          price={contents.p_price}
+          onClick={() => dispatch(addToCart(contents))}
+          // totalSales={contents.totalSales}
+          // timeLeft={contents.timeLeft}
+          // rating={contents.rating}
         />
       ))}
     </div>
@@ -330,4 +342,4 @@ const AllUsers = (props) => {
 //   );
 // };
 
-export default AllUsers;
+export default ProductsView;
