@@ -1,16 +1,14 @@
 import React from "react";
-
+import ShoppingCart from "../components/layouts/ShoppingCart";
 const Cart = () => {
   return (
     <div
       style={{
         display: "flex",
-        justifyContent: "Right",
-        alignItems: "Right",
-        height: "100vh",
-      }}
-    >
-      <h1>Cart</h1>
+        justifyContent: "center",
+      }}>
+      
+      <ShoppingCart />
     </div>
   );
 };

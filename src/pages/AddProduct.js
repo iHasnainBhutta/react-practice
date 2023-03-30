@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "../forms/LoginForm";
+import AddProductForm from "../forms/AddProductForm";
 import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
@@ -9,13 +9,10 @@ const Login = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "60vh",
       }}
     >
-     
-
       <div>
-        <LoginForm />
+        <AddProductForm />
       </div>
     </div>
   );

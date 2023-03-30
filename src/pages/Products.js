@@ -1,24 +1,22 @@
 import React from "react";
 import LoginForm from "../forms/LoginForm";
 import { ToastContainer, toast } from "react-toastify";
-
-const Login = () => {
+import ProductsView from "../tables/ProductsView";
+const Products = () => {
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "60vh",
+        // height: "100vh",
       }}
     >
-     
-
-      <div>
-        <LoginForm />
+      <div style={{ marginTop: "30px" }}>
+        <ProductsView />
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Products;

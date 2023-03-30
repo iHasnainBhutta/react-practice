@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "../forms/LoginForm";
+import ResetForm from "../forms/ResetPasswordForm";
 import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
@@ -12,10 +12,8 @@ const Login = () => {
         height: "60vh",
       }}
     >
-     
-
       <div>
-        <LoginForm />
+        <ResetForm />
       </div>
     </div>
   );
