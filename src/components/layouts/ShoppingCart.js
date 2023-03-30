@@ -148,7 +148,7 @@ const Cart = (props) => {
                                 }}
                               />
                               <label className="form-label" for="form1">
-                                Quantity
+                                Quantity 
                               </label>
                             </div>
 
