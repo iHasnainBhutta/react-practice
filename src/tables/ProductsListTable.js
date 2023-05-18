@@ -15,6 +15,7 @@ import { FaPlus, FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { BsChevronDown } from "react-icons/bs";
 import CustomButton from "../components/layouts/CustomButton";
 import { type } from "@testing-library/user-event/dist/type";
+import { URL , IMG_URL} from "../api/urls";
 
 const ProductsListTable = (props) => {
   const [checkedItems, setCheckedItems] = useState({});
@@ -23,7 +24,7 @@ const ProductsListTable = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
-  let img = `http://localhost:8008/`;
+  // let img = `http://localhost:8008/`;
   const navigate = useNavigate();
 
   // const handleChange = (event) => {
@@ -49,7 +50,7 @@ const ProductsListTable = (props) => {
       // alert("working");
       // console.log(values);
       const res = await axios.get(
-        "http://localhost:8008/user/view-product",
+        URL + "view-product",
         { headers },
         {
           withCredentials: true,
@@ -84,8 +85,8 @@ const ProductsListTable = (props) => {
       // console.log(values);
       const res = await axios.delete(
         selectedRows.length >= 2
-          ? `http://localhost:8008/user/delete-multi-products`
-          : `http://localhost:8008/user/delete-product/${p_id}`,
+          ? URL + `delete-multi-products`
+          : URL + `delete-product/${p_id}`,
         selectedRows.length >= 2 ? { data: selectedRows } : { data: product },
         { headers },
         {
@@ -131,7 +132,7 @@ const ProductsListTable = (props) => {
           theme: "colored",
         });
         navigate("/ProductsList", { replace: true });
-        setSelectedRows([])
+        setSelectedRows([]);
 
         // console.log("Result ", res.data.result);
       } else {
@@ -204,7 +205,8 @@ const ProductsListTable = (props) => {
           justifyContent: "flex-end",
           alignItems: "center",
           flexDirection: "row",
-        }}>
+        }}
+      >
         {isTrue && <CustomButton iconName={<FaTrash />} onClick={deleteRow} />}
         <CustomButton
           iconName={<FaPlus />}
@@ -267,9 +269,10 @@ const ProductsListTable = (props) => {
                     height: 50,
                     width: 60,
                     padding: 4,
-                  }}>
+                  }}
+                >
                   <img
-                    src={img + i.image_url}
+                    src={IMG_URL + i.image_url}
                     alt="product-img"
                     style={{ height: "100%", width: "100%" }}
                     // className="productImage"
@@ -290,9 +293,10 @@ const ProductsListTable = (props) => {
                         // borderRadius: 100,
                         // padding: "0.50rem 0.9rem",
                         maxHeight: 30,
-                        maxWidth: 28
+                        maxWidth: 28,
                       }}
-                      tog></Dropdown.Toggle>
+                      tog
+                    ></Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="">Edit</Dropdown.Item>
                       <Dropdown.Item onClick={() => deleteRow(i)}>

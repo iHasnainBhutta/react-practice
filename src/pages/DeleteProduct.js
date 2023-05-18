@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { URL, IMG_URL } from "../api/urls";
 
 const DeleteProduct = (props) => {
   const [productId, setProductId] = useState();
@@ -13,9 +14,6 @@ const DeleteProduct = (props) => {
   //   const [currentProduct, setCurrentProduct] = useState([]);
   console.log("!!!!!!!", data);
   const navigate = useNavigate();
-
-
-
 
   const DelProductHandler = async (e) => {
     console.log(">>>>>>>>>>>>>>>>........................", e);
@@ -26,7 +24,7 @@ const DeleteProduct = (props) => {
       // console.log(values);
       const res = await axios.delete(
         // `http://localhost:8008/user/delete-product/${e}`,
-        `http://localhost:8008/user/delete-product/${p_id}`,
+        URL + `delete-product/${p_id}`,
         { data: e },
         { headers },
         {
@@ -89,7 +87,7 @@ const DeleteProduct = (props) => {
       // alert("working");
       // console.log(values);
       const res = await axios.get(
-        "http://localhost:8008/user/view-product",
+        URL + "view-product",
         { headers },
         {
           withCredentials: true,
@@ -113,7 +111,7 @@ const DeleteProduct = (props) => {
       console.error(error);
     }
   };
-  let img = `http://localhost:8008/`;
+  // let img = `http://localhost:8008/`;
 
   const [screenSize, getDimension] = useState({
     dynamicWidth: window.innerWidth,
@@ -200,7 +198,7 @@ const DeleteProduct = (props) => {
                       }}
                       src={
                         products.image_url != null
-                          ? img + products.image_url
+                          ? IMG_URL + products.image_url
                           : require("../components/assets/empty.jpg")
                       }
                       onResize=""

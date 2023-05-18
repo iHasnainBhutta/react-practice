@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { useParams, useNavigate } from "react-router-dom";
+import { URL } from "../api/urls";
 
 function ResetForm() {
   const [password, setPassword] = useState();
@@ -23,7 +24,7 @@ function ResetForm() {
       e.preventDefault();
       setLoading(true);
       const res = await axios.patch(
-        `http://localhost:8008/user/reset-password/${id}`,
+        URL + `reset-password/${id}`,
         { password: password },
         { headers },
         {

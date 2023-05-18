@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import { URL } from "../api/urls";
 
 function LoginForm() {
   const [data, setData] = useState("");
@@ -24,7 +25,7 @@ function LoginForm() {
       // alert("working");
       // console.log(values);
       const res = await axios.post(
-        "http://localhost:8008/user/user-login",
+        URL + "user-login",
         { email: email, password: password },
         { headers },
         {
@@ -108,18 +109,17 @@ function LoginForm() {
 
       <div className="d-grid">
         {!isLoading && (
-          <button 
-           style={{     maxHeight: 30,
-            maxWidth: 95}}
-          type="submit" className="btn btn-primary">
+          <button
+            style={{ maxHeight: 30, maxWidth: 95 }}
+            type="submit"
+            className="btn btn-primary"
+          >
             Login
           </button>
         )}
 
         {isLoading && (
-          <Button 
-          
-          variant="primary" disabled>
+          <Button variant="primary" disabled>
             <Spinner
               as="span"
               animation="border"

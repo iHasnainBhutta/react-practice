@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import { URL } from "../api/urls";
 
 function Signup() {
   const [data, setData] = useState("");
@@ -24,7 +25,7 @@ function Signup() {
       // alert("working");
       // console.log(values);
       const res = await axios.post(
-        "http://localhost:8008/user/user-register",
+        URL + "user-register",
         { email: email, password: password },
         { headers },
         {

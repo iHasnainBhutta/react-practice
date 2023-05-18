@@ -9,7 +9,7 @@ import contents from "../content";
 import { Card, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../features/cartSlice";
-
+import { URL ,IMG_URL} from "../api/urls";
 
 const ProductsView = (props) => {
   const [data, setData] = useState([]);
@@ -82,7 +82,7 @@ const ProductsView = (props) => {
     "Content-Type": "application/json",
   };
 
-  let img = `http://localhost:8008/`;
+  // let IMG_URL = `http://localhost:8008/`;
 
   const [rows, setRows] = useState(data);
 
@@ -94,7 +94,7 @@ const ProductsView = (props) => {
       // alert("working");
       // console.log(values);
       const res = await axios.delete(
-        `http://localhost:8008/user/delete-product/${rowId}`,
+        URL + `delete-product/${rowId}`,
         { headers },
         {
           withCredentials: true,
@@ -137,7 +137,7 @@ const ProductsView = (props) => {
       // alert("working");
       // console.log(values);
       const res = await axios.get(
-        "http://localhost:8008/user/view-product",
+        URL + "view-product",
         { headers },
         {
           withCredentials: true,
@@ -161,13 +161,13 @@ const ProductsView = (props) => {
       console.error(error);
     }
   };
-  
+
   return (
     <div className="App">
       {data.map((contents) => (
         <Products
           key={contents.p_id}
-          image={img + contents.image_url}
+          image={IMG_URL + contents.image_url}
           name={contents.product_name}
           price={contents.p_price}
           onClick={() => dispatch(addToCart(contents))}

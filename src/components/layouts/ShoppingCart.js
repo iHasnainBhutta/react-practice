@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { IMG_URL } from "../../api/urls";
 
 const Cart = (props) => {
   let [count, setCount] = useState(0);
@@ -19,7 +20,7 @@ const Cart = (props) => {
   const { cart } = useSelector((state) => state.allCart);
 
   // console.log("cart---->", cart[0].p_price);
-  let img = `http://localhost:8008/`;
+  // let IMG_URL = `http://localhost:8008/`;
 
   const [dataAray, setDataArray] = useState(cart);
 
@@ -90,7 +91,7 @@ const Cart = (props) => {
                           <div
                             className="bg-image hover-overlay hover-zoom ripple rounded"
                             data-mdb-ripple-color="light">
-                            <img src={img + data.image_url} className="w-100" />
+                            <img src={IMG_URL + data.image_url} className="w-100" />
                             <a href="#!">
                               <div
                                 className="mask"

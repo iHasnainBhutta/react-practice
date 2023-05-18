@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import { URL } from "../api/urls";
 
 function Forget() {
   const [email, setEmail] = useState();
@@ -22,7 +23,7 @@ function Forget() {
       // alert("working");
       // console.log(values);
       const res = await axios.patch(
-        "http://localhost:8008/user/forgot-password",
+        URL + "/forgot-password",
         { email: email },
         { headers },
         {

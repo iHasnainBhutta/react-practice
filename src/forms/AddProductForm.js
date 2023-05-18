@@ -7,6 +7,7 @@ import FormData from "form-data";
 import { resolveUrl } from "../api/urls";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import {URL} from "../api/urls"
 
 function AddProductForm() {
   const [data, setData] = useState("");
@@ -46,7 +47,7 @@ function AddProductForm() {
       // alert("working");
       // console.log(values);
       const res = await axios.post(
-        `http://localhost:8008/user/insert-product`,
+        URL+`insert-product`,
         // {
         //   product_name: productName,
         //   product_description: productDes,
