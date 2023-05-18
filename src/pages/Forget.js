@@ -23,7 +23,7 @@ function Forget() {
       // alert("working");
       // console.log(values);
       const res = await axios.patch(
-        URL + "/forgot-password",
+        URL + "forgot-password",
         { email: email },
         { headers },
         {
