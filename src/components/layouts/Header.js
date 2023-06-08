@@ -1,4 +1,5 @@
 import Container from "react-bootstrap/Container";
+import React, { useState, useEffect } from "react";
 import { propTypes } from "react-bootstrap/esm/Image";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,8 +9,15 @@ import HeaderCartButton from "./HeaderCartButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function CollapsibleExample(props) {
+  const { cart } = useSelector((state) => state.allCart);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    setCartCount(cart.length);
+  }, [cart]);
   const location = useLocation();
   console.log(location.pathname);
   const handleLogout = () => {
@@ -29,7 +37,8 @@ function CollapsibleExample(props) {
       </div>
       <Navbar.Brand
         style={{ marginLeft: 10, fontWeight: "bold" }}
-        href={props.url ? "/" : "/login"}>
+        href={props.url ? "/" : "/login"}
+      >
         Shopping Adventures
       </Navbar.Brand>
       <Container style={{ marginLeft: 20, width: "50%" }}>
@@ -40,7 +49,8 @@ function CollapsibleExample(props) {
               <Nav.Link
                 as={Link}
                 to="/"
-                active={location.pathname === "/" && "true"}>
+                active={location.pathname === "/" && "true"}
+              >
                 DASHBOARD
               </Nav.Link>
             )}
@@ -50,7 +60,8 @@ function CollapsibleExample(props) {
             <Nav.Link
               as={Link}
               to="/products"
-              active={location.pathname === "/products" && "true"}>
+              active={location.pathname === "/products" && "true"}
+            >
               SHOP
             </Nav.Link>
             <Nav.Link as={Link} to="/men">
@@ -90,6 +101,7 @@ function CollapsibleExample(props) {
 
         <HeaderCartButton
           onClick={() => navigate("/cart", { replace: true })}
+          totalCart={cartCount > 0 ? cartCount : 0}
         />
         {!props.isLogin && (
           <Nav.Link as={Link} to="/login">
@@ -105,8 +117,9 @@ function CollapsibleExample(props) {
                 borderRadius: 50,
                 padding: "0.50rem 0.9rem",
                 maxHeight: 30,
-                maxWidth: 95
-              }}>
+                maxWidth: 95,
+              }}
+            >
               My Profile
             </Dropdown.Toggle>
 

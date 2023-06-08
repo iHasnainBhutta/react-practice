@@ -24,7 +24,7 @@ function AddProductForm() {
   const navigate = useNavigate();
 
   const headers = {
-    "Content-Type": "multipart/form-data",
+    // "Content-Type": "multipart/form-data",
     // "Content-Type": "application/json",
   };
 

@@ -9,17 +9,32 @@ import contents from "../content";
 import { Card, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../features/cartSlice";
-import { URL ,IMG_URL} from "../api/urls";
+import { URL, IMG_URL } from "../api/urls";
+import Lottie from "react-lottie";
+import * as animationData from "../components/assets/empty.json";
 
 const ProductsView = (props) => {
   const [data, setData] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(true);
   // const [items, setItems] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
 
   const items = useSelector((state) => state.allCart);
   const dispatch = useDispatch();
-  console.log(items);
+  console.log("here ", items);
   const handleOnChange = (e) => {
     const { name, checked } = e.target;
     // alert(name);
@@ -27,20 +42,19 @@ const ProductsView = (props) => {
       const checkedValue = data.map((user) => {
         return { ...user, isChecked: checked };
       });
-      console.log(checkedValue);
+      // console.log(checkedValue);
       setData(checkedValue);
     } else {
       let items = [];
       const checkedValue = data.map((user) => {
         if (user.p_id == name) {
-          console.log("if");
           return { ...user, isChecked: checked };
         } else {
           return user;
-          console.log("Else", user.p_id, name);
+          // console.log("Else", user.p_id, name);
         }
       });
-      console.log(checkedValue);
+      // console.log(checkedValue);
       // setData(checkedValue);
       // setRows(updatedRows);
 
@@ -71,13 +85,13 @@ const ProductsView = (props) => {
       // return { isChecked: checked };
     }
   };
-  console.log(userData);
+  // console.log(userData);
   const handleOnChangeItem = (i) => {
     let items = [];
     items.push(i);
     // setItems(items);
   };
-  console.log(">>", isChecked);
+  // console.log(">>", isChecked);
   const headers = {
     "Content-Type": "application/json",
   };
@@ -87,7 +101,7 @@ const ProductsView = (props) => {
   const [rows, setRows] = useState(data);
 
   const deleteRow = async (rowId) => {
-    console.log(rowId);
+    // console.log(rowId);
     try {
       //   e.preventDefault();
 
@@ -100,14 +114,14 @@ const ProductsView = (props) => {
           withCredentials: true,
         }
       );
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         setData(res.data.result);
 
         const filteredRows = rows.filter((row) => row.user_id !== rowId);
         setRows(filteredRows);
         window.location.href = "/ViewUsers";
-        console.log(">>", res.data.result);
+        // console.log(">>", res.data.result);
         // console.log(res);
 
         //   toast.success(res.data);
@@ -127,7 +141,7 @@ const ProductsView = (props) => {
     getData();
   }, []);
 
-  console.log(">>", data);
+  // console.log("Data::::", data);
   //   console.log(columns[1].Header);
   // console.log(">>>>>>>>>>>>>>>>>>>>>..", data[0].verified);
   const getData = async (e) => {
@@ -146,7 +160,12 @@ const ProductsView = (props) => {
       //   console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", res.status);
       if (res.status === 200) {
         setData(res.data.result);
-        // console.log(">>", res.data.result);
+
+        if (res.data.result.length === 0) {
+          setIsEmpty(false);
+        }
+        // if()
+
         // console.log(res);
 
         //   toast.success(res.data);
@@ -163,7 +182,9 @@ const ProductsView = (props) => {
   };
 
   return (
-    <div className="App">
+    <div>
+      {!isEmpty && <Lottie options={defaultOptions} height={200} width={200} />}
+
       {data.map((contents) => (
         <Products
           key={contents.p_id}
