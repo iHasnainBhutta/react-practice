@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { FaPlus, FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { FaPlus, FaEye, FaEdit, FaTrash,  } from "react-icons/fa";
 
 const Dashboard = () => {
   const [screenSize, getDimension] = useState({

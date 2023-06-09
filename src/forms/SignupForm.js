@@ -4,11 +4,18 @@ import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { URL } from "../api/urls";
+import { Link } from "react-router-dom";
+import emailIcon from "../components/assets/emailIcon.svg";
+import passwordIcon from "../components/assets/passwordIcon.svg";
+import userIcon from "../components/assets/userIcon.svg";
+import styles from "./LoginForm.module.css";
 
 function Signup() {
   const [data, setData] = useState("");
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  const [IsAccepted, setIsAccepted] = useState();
   const [check, setCheck] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [verified, setVerified] = useState(false);
@@ -62,58 +69,141 @@ function Signup() {
     }
   };
   return !check ? (
-    <form onSubmit={submit}>
-      <h3>Sign Up</h3>
+    // <form onSubmit={submit}>
+    //   <h3>Sign Up</h3>
 
-      <div className="mb-3">
-        <label>Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
+    //   <div className="mb-3">
+    //     <label>Email address</label>
+    //     <input
+    //       type="email"
+    //       className="form-control"
+    //       placeholder="Enter email"
+    //       value={email}
+    //       onChange={(e) => setEmail(e.target.value)}
+    //       required
+    //     />
+    //   </div>
 
-      <div className="mb-3">
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
+    //   <div className="mb-3">
+    //     <label>Password</label>
+    //     <input
+    //       type="password"
+    //       className="form-control"
+    //       placeholder="Enter password"
+    //       value={password}
+    //       onChange={(e) => setPassword(e.target.value)}
+    //       required
+    //     />
+    //   </div>
 
-      <div className="d-grid">
-        {!isLoading && (
-          <button type="submit" className="btn btn-primary">
-            Sign up
-          </button>
-        )}
+    //   <div className="d-grid">
+    //     {!isLoading && (
+    //       <button type="submit" className="btn btn-primary">
+    //         Sign up
+    //       </button>
+    //     )}
 
-        {isLoading && (
-          <Button variant="primary" disabled>
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
+    //     {isLoading && (
+    //       <Button variant="primary" disabled>
+    //         <Spinner
+    //           as="span"
+    //           animation="border"
+    //           size="sm"
+    //           role="status"
+    //           aria-hidden="true"
+    //         />
+    //         <span className="visually-hidden"> Processing</span>
+    //       </Button>
+    //     )}
+    //   </div>
+
+    //   <p>
+    //     Already have an account? <a href="/login">Login</a>
+    //   </p>
+    // </form>
+
+    <div className={styles.container}>
+      <form className={styles.formLogin} onSubmit={submit} autoComplete="off">
+        <h2>Sign Up</h2>
+        <div>
+
+        <div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            autoComplete="off"
+          />
+          <img src={userIcon} alt="" />
+        </div>
+        </div>
+        <div>
+          <div>
+            <input
+              type="text"
+              name="email"
+              value={email}
+              placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="off"
             />
-            <span className="visually-hidden"> Processing</span>
-          </Button>
-        )}
-      </div>
-
-      <p>
-        Already have an account? <a href="/login">Login</a>
-      </p>
-    </form>
+            <img src={emailIcon} alt="" />
+          </div>
+        </div>
+        <div>
+          <div>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="off"
+            />
+            <img src={passwordIcon} alt="" />
+          </div>
+        </div>
+        <div>
+          <div>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              placeholder="Confirm Password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              autoComplete="off"
+            />
+            <img src={passwordIcon} alt="" />
+          </div>
+        </div>
+        <div>
+          <div className={styles.terms}>
+            <input
+              type="checkbox"
+              name="IsAccepted"
+              value={IsAccepted}
+              id="accept"
+              onChange={(e) => setIsAccepted(e.target.value)}
+            />
+            <label htmlFor="accept" style={{marginTop: 4}}>I accept terms of privacy policy</label>
+          </div>
+        </div>
+        <div>
+          <button type="submit">Create Account</button>
+          <span
+            style={{
+              color: "#a29494",
+              textAlign: "center",
+              display: "inline-block",
+              width: "100%",
+            }}
+          >
+            Already have a account? <Link to="/login">Sign In</Link>
+          </span>
+        </div>
+      </form>
+      <ToastContainer />
+    </div>
   ) : (
     <>
       {!verified && (

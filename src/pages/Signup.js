@@ -5,13 +5,13 @@ import Signup from "../forms/SignupForm";
 const Login = () => {
   return (
     <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "60vh",
-      }}
-    >
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      // height: "60vh",
+    }}
+  >
      
 
       <div>

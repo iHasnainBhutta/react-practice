@@ -6,8 +6,10 @@ const HeaderCartButton = (props) => {
       <span className={classes.icon}>
         <CartIcon />
       </span>
-      <span style={{minWidth: 71}}>Your Cart</span>
-      <span className={classes.badge}>{props.totalCart}</span>
+      <span style={{ minWidth: 71 }}>Your Cart</span>
+      {props.totalCart > 0 && (
+        <span className={classes.badge}>{props.totalCart}</span>
+      )}
     </button>
   );
 };

@@ -37,7 +37,8 @@ function CollapsibleExample(props) {
       </div>
       <Navbar.Brand
         style={{ marginLeft: 10, fontWeight: "bold" }}
-        href={props.url ? "/" : "/login"}
+        // href={props.url ? "/products" : "/login"}
+        href="/products"
       >
         Shopping Adventures
       </Navbar.Brand>

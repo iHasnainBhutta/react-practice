@@ -56,14 +56,17 @@ function App(props) {
           />
         </Routes>
       )}
+      <Routes>
+
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/men" element={<Men />} />
+      <Route path="/women" element={<Women />} />
+      <Route path="/kids" element={<Kids />} />
+      </Routes>
       {check && (
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/men" element={<Men />} />
-          <Route path="/women" element={<Women />} />
-          <Route path="/kids" element={<Kids />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/products" element={<Products />} />
           <Route path="/AddProduct" element={<AddProduct />} />
           <Route path="/deleteProduct" element={<DeleteProduct />} />
           <Route path="/ProductsList" element={<ProductsList />} />

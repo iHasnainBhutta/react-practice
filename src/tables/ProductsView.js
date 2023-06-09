@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import LoginForm from "../forms/LoginForm";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-// import { Button } from "react-bootstrap";
 import { Products } from "../components/layouts/ProductCard";
 import contents from "../content";
 import { Card, Button } from "react-bootstrap";
@@ -15,9 +14,7 @@ import * as animationData from "../components/assets/empty.json";
 
 const ProductsView = (props) => {
   const [data, setData] = useState([]);
-  const [userData, setUserData] = useState([]);
   const [isEmpty, setIsEmpty] = useState(true);
-  // const [items, setItems] = useState([]);
   const [isChecked, setIsChecked] = useState(true);
 
   const defaultOptions = {
@@ -35,6 +32,7 @@ const ProductsView = (props) => {
   const items = useSelector((state) => state.allCart);
   const dispatch = useDispatch();
   console.log("here ", items);
+
   const handleOnChange = (e) => {
     const { name, checked } = e.target;
     // alert(name);
@@ -54,44 +52,9 @@ const ProductsView = (props) => {
           // console.log("Else", user.p_id, name);
         }
       });
-      // console.log(checkedValue);
-      // setData(checkedValue);
-      // setRows(updatedRows);
-
-      // setUserData(...items, items);
-
-      // const checkedValue = data.map(
-      //   (user) => {
-      //     if (user.product_name === name) {
-      //       console.log(user.product_name);
-      //       items.push(user.product_name);
-      //     } else {
-      //       console.log("Error");
-      //     }
-      //   }
-
-      // ? { ...user, isChecked: checked }
-      // : console.log(user.product_name, name, checked)
-      // );
-      // console.log(items);
-      // console.log(">>>>>>>>>>", checkedValue);
-      // setUserData(checkedValue);
-
-      // // alert(name);
-      // let items_ = [];
-      // items_.push(name);
-      // setItems(items_);
-      // console.log(">>>>>>>>>>>", items);
-      // return { isChecked: checked };
     }
   };
-  // console.log(userData);
-  const handleOnChangeItem = (i) => {
-    let items = [];
-    items.push(i);
-    // setItems(items);
-  };
-  // console.log(">>", isChecked);
+
   const headers = {
     "Content-Type": "application/json",
   };
@@ -105,8 +68,6 @@ const ProductsView = (props) => {
     try {
       //   e.preventDefault();
 
-      // alert("working");
-      // console.log(values);
       const res = await axios.delete(
         URL + `delete-product/${rowId}`,
         { headers },
@@ -141,15 +102,10 @@ const ProductsView = (props) => {
     getData();
   }, []);
 
-  // console.log("Data::::", data);
-  //   console.log(columns[1].Header);
-  // console.log(">>>>>>>>>>>>>>>>>>>>>..", data[0].verified);
   const getData = async (e) => {
     try {
       //   e.preventDefault();
 
-      // alert("working");
-      // console.log(values);
       const res = await axios.get(
         URL + "view-product",
         { headers },
@@ -157,22 +113,13 @@ const ProductsView = (props) => {
           withCredentials: true,
         }
       );
-      //   console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", res.status);
+
       if (res.status === 200) {
         setData(res.data.result);
 
         if (res.data.result.length === 0) {
           setIsEmpty(false);
         }
-        // if()
-
-        // console.log(res);
-
-        //   toast.success(res.data);
-        //   toast.success(res.data, {
-        //     position: toast.POSITION.TOP_RIGHT,
-        //   });
-        // console.log(">>>>>", res.data.result.verified);
       } else {
         alert(res.data.message);
       }
@@ -184,19 +131,20 @@ const ProductsView = (props) => {
   return (
     <div>
       {!isEmpty && <Lottie options={defaultOptions} height={200} width={200} />}
-
-      {data.map((contents) => (
-        <Products
-          key={contents.p_id}
-          image={IMG_URL + contents.image_url}
-          name={contents.product_name}
-          price={contents.p_price}
-          onClick={() => dispatch(addToCart(contents))}
-          // totalSales={contents.totalSales}
-          // timeLeft={contents.timeLeft}
-          // rating={contents.rating}
-        />
-      ))}
+      <div className="row p-20">
+        {data.map((contents) => (
+          <Products
+            key={contents.p_id}
+            image={IMG_URL + contents.image_url}
+            name={contents.product_name}
+            price={contents.p_price}
+            onClick={() => dispatch(addToCart(contents))}
+            // totalSales={contents.totalSales}
+            // timeLeft={contents.timeLeft}
+            // rating={contents.rating}
+          />
+        ))}
+      </div>
     </div>
     // <Table striped bordered responsive>
     //   <thead>
