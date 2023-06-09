@@ -3,7 +3,12 @@ import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import { Link } from "react-router-dom";
+import emailIcon from "../components/assets/emailIcon.svg";
+import passwordIcon from "../components/assets/passwordIcon.svg";
+
 import { URL } from "../api/urls";
+import styles from "./LoginForm.module.css";
 
 function LoginForm() {
   const [data, setData] = useState("");
@@ -12,10 +17,15 @@ function LoginForm() {
   const [check, setCheck] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [verified, setVerified] = useState(false);
+  const [touched, setTouched] = useState({});
   console.log(email, password);
 
   const headers = {
     "Content-Type": "application/json",
+  };
+
+  const focusHandler = (event) => {
+    setTouched({ ...touched, [event.target.name]: true });
   };
 
   const submit = async (e) => {
@@ -67,77 +77,68 @@ function LoginForm() {
     }
   };
   return !check ? (
-    <form onSubmit={submit}>
-      <h3>Sign In</h3>
-
-      <div className="mb-3">
-        <label>Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-
-      <div className="mb-3">
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-
-      <div className="mb-3">
-        <div className="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="customCheck1"
-          />
-          <label className="custom-control-label" htmlFor="customCheck1">
-            Remember me
-          </label>
-        </div>
-      </div>
-
-      <div className="d-grid">
-        {!isLoading && (
-          <button
-            style={{ maxHeight: 30, maxWidth: 95 }}
-            type="submit"
-            className="btn btn-primary"
-          >
-            Login
-          </button>
-        )}
-
-        {isLoading && (
-          <Button variant="primary" disabled>
-            <Spinner
-              as="span"
-              animation="border"
-              size="sm"
-              role="status"
-              aria-hidden="true"
+    <div className={styles.container}>
+      <form className={styles.formLogin} onSubmit={submit} autoComplete="off">
+        <h2>Sign In</h2>
+        <div>
+          <div>
+            <input
+              type="email"
+              className="form-control"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              placeholder="E-mail"
+              autoComplete="off"
             />
-            <span className="visually-hidden">Login</span>
-          </Button>
-        )}
-      </div>
-      <p className="forgot-password">
-        Forgot <a href="/forget">password?</a>
-      </p>
-      <p>
-        Don't have an account? <a href="/signup">Sign Up</a>
-      </p>
-    </form>
+            <img src={emailIcon} alt="" />
+          </div>
+        </div>
+        <div>
+          <div>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              name="password"
+              autoComplete="off"
+              onFocus={focusHandler}
+            />
+            <img src={passwordIcon} alt="" />
+          </div>
+        </div>
+
+        <div>
+          {!isLoading && <button type="submit">Login</button>}
+          {isLoading && (
+            <button type="submit" disabled>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+              Login
+            </button>
+          )}
+          <span
+            style={{
+              color: "#a29494",
+              textAlign: "center",
+              display: "inline-block",
+              width: "100%",
+            }}
+          >
+            Don't have a account? <Link to="/signup">Create account</Link>
+          </span>
+        </div>
+      </form>
+      <ToastContainer />
+    </div>
   ) : (
     <>
       {!verified && (
